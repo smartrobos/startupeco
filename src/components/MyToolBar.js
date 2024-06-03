@@ -15,11 +15,13 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from 'react-router-dom';
 import { auth, signOut } from '../firebaseConfig';
+import profilePicPlaceholder from '../assets/images/profile-pic-placeholder.jpeg';
 
 const MyToolbar = () => {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const navigate = useNavigate();
+    const user = JSON.parse(localStorage.getItem('user'));
 
     const toggleDrawer = (open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -31,6 +33,7 @@ const MyToolbar = () => {
     const logout = async () => {
         try {
             await signOut(auth);
+            localStorage.clear();
             navigateTo('login');
         } catch (error) {
             console.error("Error signing out: ", error);
@@ -94,7 +97,7 @@ const MyToolbar = () => {
                         </MenuItem>
                     </Menu>
                     <Avatar onClick={(event) => openMenu(event)} aria-haspopup="true"
-                        alt="Profile" src="https://static.vecteezy.com/system/resources/thumbnails/036/594/092/small_2x/man-empty-avatar-photo-placeholder-for-social-networks-resumes-forums-and-dating-sites-male-and-female-no-photo-images-for-unfilled-user-profile-free-vector.jpg" />
+                        alt="Profile" src={user != null ? user.photoURL : profilePicPlaceholder} />
                 </Toolbar>
             </AppBar>
             <Drawer anchor="left" open={isDrawerOpen} onClose={toggleDrawer(false)}>

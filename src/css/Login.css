@@ -17,6 +17,7 @@
     border-radius: 20px;
     width: 80%;
     justify-content: center;
+    cursor: pointer;
   }
   
   .btn-google .google-icon {

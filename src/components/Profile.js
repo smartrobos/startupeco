@@ -109,11 +109,16 @@ const Profile = () => {
         const fetchData = async () => {
             try {
                 const data = (await getDoc(doc(db, "users", user.uid))).data();
-                setprofileType(data.profile_types ?? ['entrepreneur']);
-                setEntrepreneurFormValues(data.entrepreneur_details);
-                setMentorFormValues(data.mentor_details);
-                setInvestorFormValues(data.investor_details);
-                console.log("Fetching user data: ", data);
+                if (data) {
+                    setprofileType(data.profile_types ?? ['entrepreneur']);
+                    setEntrepreneurFormValues(data.entrepreneur_details);
+                    setMentorFormValues(data.mentor_details);
+                    setInvestorFormValues(data.investor_details);
+                    console.log("Fetching user data: ", data);
+                }
+                else {
+                    setprofileType(['entrepreneur']);
+                }
             } catch (e) {
                 console.error("Error fetching user details: ", e);
             }

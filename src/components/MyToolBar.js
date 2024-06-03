@@ -56,6 +56,10 @@ const MyToolbar = () => {
                     <ListItemIcon><Home color='info' /></ListItemIcon>
                     <ListItemText primary={'Home'} />
                 </ListItemButton>
+                <ListItemButton key={'Search'} onClick={() => navigateTo('search')}>
+                    <ListItemIcon><Person color='info' /></ListItemIcon>
+                    <ListItemText primary={'Search'} />
+                </ListItemButton>
                 <ListItemButton key={'Profile'} onClick={() => navigateTo('profile')}>
                     <ListItemIcon><Person color='info' /></ListItemIcon>
                     <ListItemText primary={'Profile'} />
